@@ -33,10 +33,10 @@ for PARAM in $@; do
         echo "Building all branches of the remote '$REMOTE'"
         $MONOREPO_SCRIPT_DIR/load_branches_from_remote.sh $REMOTE
         $MONOREPO_SCRIPT_DIR/rewrite_history_into.sh $SUBDIRECTORY --branches
-        MERGE_REFS='master'
+        MERGE_REFS='main'
     else
-        echo "Building branch 'master' of the remote '$REMOTE'"
-        git checkout --detach $REMOTE/master
+        echo "Building branch 'main' of the remote '$REMOTE'"
+        git checkout --detach $REMOTE/main
         $MONOREPO_SCRIPT_DIR/rewrite_history_into.sh $SUBDIRECTORY
         MERGE_REFS="$MERGE_REFS $(git rev-parse HEAD)"
     fi
@@ -44,8 +44,8 @@ for PARAM in $@; do
     $MONOREPO_SCRIPT_DIR/original_refs_wipe.sh
 done
 # Merge all master branches
-COMMIT_MSG="merge multiple repositories into a monorepo"$'\n'$'\n'"- merged using: 'monorepo_build.sh $@'"$'\n'"- see https://github.com/shopsys/monorepo-tools"
-git checkout master
+COMMIT_MSG="feat(sazz_monorepotools): merged monorepo."
+git checkout main
 echo "Merging refs: $MERGE_REFS"
 git merge --no-commit -q $MERGE_REFS --allow-unrelated-histories
 echo 'Resolving conflicts using trees of all parents'
