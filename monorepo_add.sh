@@ -36,7 +36,7 @@ for PARAM in $@; do
     $MONOREPO_SCRIPT_DIR/original_refs_wipe.sh
 done
 # Merge all master branches
-COMMIT_MSG="merge multiple repositories into an existing monorepo"$'\n'$'\n'"- merged using: 'monorepo_add.sh $@'"$'\n'"- see https://github.com/shopsys/monorepo-tools"
+COMMIT_MSG="feat(sazz_monorepotools): merged a new repository."
 git checkout main
 echo "Merging refs: $MERGE_REFS"
 git merge --no-commit -q $MERGE_REFS --allow-unrelated-histories
